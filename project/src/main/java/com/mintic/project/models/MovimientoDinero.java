@@ -1,9 +1,6 @@
 package com.mintic.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -13,6 +10,10 @@ public class MovimientoDinero {
     private double monto;
     private String concepto;
     private String tipo;
+
+    @ManyToOne
+    @JoinColumn(name="empleado_id")
+    private Empleado empleado;
 
     @Override
     public String toString() {
