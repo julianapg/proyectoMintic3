@@ -1,5 +1,7 @@
 package com.mintic.project.controllers;
 
+import com.mintic.project.models.Empleado;
+import com.mintic.project.models.Empresa;
 import com.mintic.project.repositories.RepositorioEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +29,20 @@ public class ControladorEmpleado {
     public String eliminarUnEmpleado(@PathVariable int id){
         repositorioEmpleado.deleteById(id);
         return "Empleado con id: "+id+" borrado";
+    }
+
+    @CrossOrigin
+    @PostMapping("/empleados")
+    public String crearEmpleado(@RequestBody Empleado empleado){
+        repositorioEmpleado.save(empleado);
+        return "Empleado creada";
+    }
+
+    @CrossOrigin
+    @PatchMapping("/empleados/{id}")
+    public String actualizarUnEmpleado(@PathVariable int id, @RequestBody Empleado empleado){
+        empleado.setId(id);
+        repositorioEmpleado.save(empleado);
+        return "Empleado actualizada";
     }
 }

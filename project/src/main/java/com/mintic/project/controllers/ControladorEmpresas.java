@@ -1,5 +1,6 @@
 package com.mintic.project.controllers;
 
+import com.mintic.project.models.Empresa;
 import com.mintic.project.repositories.RepositorioEmpresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +28,20 @@ public class ControladorEmpresas {
     public String eliminarUnaEmpresa(@PathVariable int id){
         repositorioEmpresa.deleteById(id);
         return "Empresa con id: "+id+" borrada";
+    }
+
+    @CrossOrigin
+    @PostMapping("/empresas")
+    public String crearEmpresas(@RequestBody Empresa empresa){
+        repositorioEmpresa.save(empresa);
+        return "Empresa creada";
+    }
+
+    @CrossOrigin
+    @PatchMapping("/empresas/{id}")
+    public String actualizarUnaEmpresa(@PathVariable int id, @RequestBody Empresa empresa){
+        empresa.setId(id);
+        repositorioEmpresa.save(empresa);
+        return "Empresa actualizada";
     }
 }

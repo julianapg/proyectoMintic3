@@ -56,4 +56,12 @@ public class MovimientoDinero {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 }

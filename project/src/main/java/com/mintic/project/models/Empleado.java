@@ -76,4 +76,12 @@ public class Empleado {
     public void setNumeroDocumento(int numeroDocumeto) {
         this.numeroDocumento = numeroDocumeto;
     }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }
