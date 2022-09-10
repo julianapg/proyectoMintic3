@@ -1,48 +1,51 @@
 package com.mintic.project.controllers;
 
 import com.mintic.project.models.Empleado;
-import com.mintic.project.models.Empresa;
-import com.mintic.project.repositories.RepositorioEmpleado;
+import com.mintic.project.services.ServicioEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+
+
 
 @RestController
 public class ControladorEmpleado {
 
     @Autowired
-    private RepositorioEmpleado repositorioEmpleado;
+    private ServicioEmpleado servicioEmpleado;
 
     @CrossOrigin
     @GetMapping("/empleados")
-    public String consultarEmpleados(){
-        return repositorioEmpleado.findAll().toString();
+    public String consultarEmpleados()
+    {
+        return servicioEmpleado.consultarTodas();
     }
 
     @CrossOrigin
     @GetMapping("/empleados/{id}")
-    public String consultarUnEmpleado(@PathVariable int id){
-        return repositorioEmpleado.findById(id).toString();
+    public String consultarUnEmpleado(@PathVariable int id)
+    {
+        return servicioEmpleado.consultarUna(id);
     }
 
     @CrossOrigin
     @DeleteMapping("/empleados/{id}")
     public String eliminarUnEmpleado(@PathVariable int id){
-        repositorioEmpleado.deleteById(id);
+        servicioEmpleado.eliminar(id);
         return "Empleado con id: "+id+" borrado";
     }
 
     @CrossOrigin
     @PostMapping("/empleados")
     public String crearEmpleado(@RequestBody Empleado empleado){
-        repositorioEmpleado.save(empleado);
-        return "Empleado creada";
+        servicioEmpleado.crear(empleado);
+        return "Empleado creado";
     }
 
     @CrossOrigin
     @PatchMapping("/empleados/{id}")
     public String actualizarUnEmpleado(@PathVariable int id, @RequestBody Empleado empleado){
-        empleado.setId(id);
-        repositorioEmpleado.save(empleado);
+        servicioEmpleado.actualizar(id,empleado);
         return "Empleado actualizada";
     }
 }
